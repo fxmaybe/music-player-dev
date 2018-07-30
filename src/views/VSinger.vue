@@ -10,6 +10,7 @@
   import {getSingerList} from '@/api/singer';
   import Singer from '@/assets/js/singer';
   import {CODE_OK} from '@/api/config';
+  import {mapMutations} from 'vuex';
 
   const HOT_SINGER_LEN = 10;
   const HOT_TITTLE  = '热门';
@@ -90,7 +91,11 @@
           path: `/singer/${singer.id}`
         });
 
-      }
+        this.setSinger(singer);
+      },
+      ...mapMutations({
+        setSinger: 'SET_SINGER'
+      })
     },
     components: {
       BListView
