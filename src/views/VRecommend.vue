@@ -4,7 +4,7 @@
       <div>
         <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
           <b-slider>
-            <div v-for="item in recommends">
+            <div v-for="(item, index) in recommends" :key="index">
               <a :href="item.linkUrl">
                 <img class="needsclick" @load="loadImage" :src="item.picUrl">
               </a>
@@ -14,7 +14,7 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li @click="selectItem(item)" class="item" v-for="(item, index) in recommendList">
+            <li @click="selectItem(item)" class="item" v-for="(item, index) in recommendList" :key="index + 1">
               <div class="icon">
                 <img width="60" height="60" :src="item.imgurl" alt="" />
               </div>
@@ -32,7 +32,7 @@
 
 <script>
   import {getRecommends, getRecommendList} from '@/api/recommend';
-  import {CODE_OK} from '@/api/config';
+  import {CODEHASH} from '@/api/config';
 
   import BScroll from '@/base/BScroll';
   import BSlider from '@/base/BSlider';
@@ -51,14 +51,14 @@
     methods: {
       _getRecommends() {
         getRecommends().then(res => {
-          if(res.code === CODE_OK) {
+          if(res.code === CODEHASH.CODE_OK) {
             this.recommends = res.data.slider;
           }
         });
       },
       _getRecommendList() {
         getRecommendList().then(res => {
-          if(res.code === CODE_OK) {
+          if(res.code === CODEHASH.CODE_OK) {
             this.recommendList = res.data.list;
           }
         });

@@ -9,7 +9,8 @@
   import BListView from '@/base/BListView'
   import {getSingerList} from '@/api/singer';
   import Singer from '@/assets/js/singer';
-  import {CODE_OK} from '@/api/config';
+  import {CODEHASH} from '@/api/config';
+  import {mapMutations} from 'vuex';
 
   const HOT_SINGER_LEN = 10;
   const HOT_TITTLE  = '热门';
@@ -26,7 +27,7 @@
     methods: {
       _getSingerList() {
         getSingerList().then(res => {
-          if(res.code === CODE_OK) {
+          if(res.code === CODEHASH.CODE_OK) {
             this.singers = this.normalizeSinger(res.data.list);
           }
         }).catch(ex => {
@@ -80,8 +81,8 @@
 
         return hot.concat(ret);
       },
-      handlePlaylist(playlist) {
-        let bottom = playlist.length > 0 ? '60px' : '';
+      handlePlaylist(playList) {
+        let bottom = playList.length > 0 ? '60px' : '';
         this.$refs.singer.style.bottom = bottom;
         this.$refs.list.refresh();
       },
@@ -90,7 +91,11 @@
           path: `/singer/${singer.id}`
         });
 
-      }
+        this.setSinger(singer);
+      },
+      ...mapMutations({
+        setSinger: 'SET_SINGER'
+      })
     },
     components: {
       BListView
