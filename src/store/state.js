@@ -1,19 +1,12 @@
 import {playMode} from '@/assets/js/config';
-import {loadSearch, loadPlay, loadFavorite} from '@/assets/js/cache';
 
-const state = {
+export default {
   singer: {},
   playing: false,
   fullScreen: false,
-  playlist: [],
+  playList: [],
   sequenceList: [],
   mode: playMode.sequence,
-  currentIndex: -1,
-  disc: {},
-  topList: {},
-  searchHistory: loadSearch(),
-  playHistory: loadPlay(),
-  favoriteList: loadFavorite()
-};
+  currentIndex: -1
 
-export default state
+}

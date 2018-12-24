@@ -6,7 +6,7 @@
     <h1 class="title" v-html="title"></h1>
     <div class="bg-image" :style="bgStyle" ref="bgImage">
       <div class="play-wrapper">
-        <div ref="playBtn" v-show="songs.length>0" class="play" @click="random">
+        <div ref="playBtn" v-show="songs.length > 0" class="play" @click="random">
           <i class="icon-play"></i>
           <span class="text">随机播放全部</span>
         </div>
@@ -35,7 +35,7 @@
   import BLoading from '@/base/loading/BLoading';
   import BSongList from '@/base/song/song-list/BSongList';
   import {prefixStyle} from '@/assets/js/dom';
-  // import {playlistMixin} from '@/assets/js/mixin';
+  // import {playListMixin} from '@/assets/js/mixin';
   import {mapActions} from 'vuex';
 
   const RESERVED_HEIGHT = 40;
@@ -43,7 +43,7 @@
   const backdrop = prefixStyle('backdrop-filter');
 
   export default {
-    // mixins: [playlistMixin],
+    // mixins: [playListMixin],
     props: {
       bgImage: {
         type: String,
@@ -82,8 +82,8 @@
       this.$refs.list.$el.style.top = `${this.imageHeight}px`;
     },
     methods: {
-      handlePlaylist(playlist) {
-        let bottom = playlist.length > 0 ? '60px' : '';
+      handlePlaylist(playList) {
+        let bottom = playList.length > 0 ? '60px' : '';
         this.$refs.list.$el.style.bottom = bottom;
         this.$refs.list.refresh();
       },

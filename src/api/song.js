@@ -4,7 +4,8 @@ import axios from 'axios';
 export function getLyric(mid) {
   let url = '/api/lyric';
 
-  let data = Object.assign({}, commonParams, {
+  let data = {
+    ...commonParams,
     songmid: mid,
     platform: 'yqq',
     hostUin: 0,
@@ -12,7 +13,7 @@ export function getLyric(mid) {
     categoryId: 10000000,
     pcachetime: +new Date(),
     format: 'json'
-  });
+  };
 
   return axios.get(url, {
     params: data

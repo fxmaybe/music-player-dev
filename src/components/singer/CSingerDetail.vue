@@ -7,7 +7,7 @@
 <script>
   import CMusicList from '@/components/music/CMusicList';
   import {getSingerDetail} from '@/api/singer';
-  import {CODE_OK} from '@/api/config';
+  import {CODEHASH} from '@/api/config';
   import {createSong} from '@/assets/js/song';
   import {mapGetters} from 'vuex';
 
@@ -39,7 +39,7 @@
         }
 
         getSingerDetail(this.singer.id).then((res) => {
-          if (res.code === CODE_OK) {
+          if (res.code === CODEHASH.CODE_OK) {
             this.songs = this.normalizeSongs(res.data.list);
           }
         });
